@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+    mongo:
+        build:
+              mongo/
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: clientreader
+            MONGO_INITDB_ROOT_PASSWORD: iamclientreader1488
+        ports:
+            - "54321:27017"
+        expose:
+            - 27017
+    imdb:
+        build:
+              python/
+        command: bash
+        ports:
+            - "54323:22"
+        environment:
+            LC_CTYPE: C.UTF-8
+        links:
+            - mongo
+        depends_on:
+            - mongo
+        environment:
+            - MONGO_URL=mongodb://mongo:54321/

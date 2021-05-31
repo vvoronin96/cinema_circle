@@ -1,0 +1,2 @@
+#docker build --no-cache -t imdb -f imdb.Dockerfile . && docker build --no-cache -t -f mongo.Dockerfile .
+docker-compose --verbose -f ./docker-compose.yml run --service-ports imdb
