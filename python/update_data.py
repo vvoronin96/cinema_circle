@@ -77,14 +77,23 @@ def connect_to_db(local=True):
     login = 'clientreader'
     pwd = 'iamclientreader1488'
     if local:
-        client = client_local = MongoClient('mongodb://localhost:27017/')
+        local_db = f'mongodb://{login}:{pwd}@mongo:27017/'
+        print(f"Trying to connect to {local_db}\n")
+        client = MongoClient(local_db)
+        try:
+           # The ismaster command is cheap and does not require auth.
+           client.admin.command('ismaster')
+           print("Connected to local MongoDB")
+        except ConnectionFailure:
+           print("Server not available")
     else:
         client = MongoClient(
             "mongodb+srv://" + login + ":" + pwd + "@clusterimdb.kihfk.mongodb.net/ClusterIMDb?retryWrites=true&w=majority")
 
-    print("Connected to MongoDB")
+        print("Connected cluster to MongoDB")
 
     return client
+
 
 def update_data():
 

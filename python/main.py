@@ -118,4 +118,5 @@ def update_figure(x_feature, y_feature, x_type, y_type, selected_year):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(host='0.0.0.0', port=8050, debug=True)
+    print(1)

@@ -16,6 +16,9 @@ services:
         command: bash
         ports:
             - "54323:22"
+            - "5050:8050"
+        volumes:
+            - ./python/:/usr/src/app
         environment:
             LC_CTYPE: C.UTF-8
         links:
